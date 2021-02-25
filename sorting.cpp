@@ -22,7 +22,7 @@ ZipCode Sort::getWest(){
     return west;
 }
 
-void Sort::printStateInfo(){
+void Sort::printStateInfo(){ // This is a temp func
     std::cout << state << " : N(" << getNorth().zipcode << "), S("<< getSouth().zipcode <<"), E("<< getEast().zipcode <<"), W(" << getWest().zipcode <<")" << std::endl;
 }
 

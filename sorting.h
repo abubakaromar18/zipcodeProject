@@ -12,9 +12,9 @@
 #include <string>
 #include "./record.h"
 
-/**
- * @brief A class for sorting out the north, south, east, and west most zip codes given.
- *  The Sort class will take in the ZipCode's via the push method. It will assign the ZipCode to the appropriate cardinal direction(s) but will reject the ZipCode if the State IDs don't match. 
+
+///@brief A class for sorting out the north, south, east, and west most zip codes given.
+/** The Sort class will take in the ZipCode's via the push method. It will assign the ZipCode to the appropriate cardinal direction(s) but will reject the ZipCode if the State IDs don't match. 
 */
 class Sort {
     /// @brief The state ID of which this sort belongs
@@ -40,6 +40,7 @@ class Sort {
          * @pre none
          * @post the given ZipCode is processed. Assigned to any relevant values in the sort buffer
          * @param zip the ZipCode to process
+         * If the zip's state ID doesn't match the state ID for this Sort instance, the ZipCode will be rejected.
         */
         void push(ZipCode zip);
 
