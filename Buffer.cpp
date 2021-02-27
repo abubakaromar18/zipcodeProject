@@ -9,90 +9,109 @@ using namespace std;
 
 buffer::buffer()
 {
-    int stepSize = 100;
-    //Allocate space for 100 char *
-    arr = (char**) malloc(stepSize * sizeof(char*)); 
+    arrayLength = initSize; ///array length = initSize; which equals 100; 
+    ///Allocate space for 100 char *
+    arr = (char**) malloc(initSize * sizeof(char*));
 }
 buffer::~buffer()
 {
-    //Deletes every element inside the array
+    ///Deletes every element inside the array
     for(int i= 0; i < arrayLength; i++)
         {
             delete arr[i];
         }
-        //deletes the array after
+        ///deletes the array after
         delete [] arr;
 }
-bool buffer:: checkOpen(FILE * file)
-{
-    if(!file)
-        {
-            std::cout << "File did not open \n";
-            return false;
-        }
-    return true;
-}
+
 void buffer::init(char * filename)
-
 {
-    //Opens file in read only mode
-    FILE *f = fopen(filename, "r");
+    ///Opens file in read only mode
+   FILE *f = fopen(filename, "r");
 
-    if(checkOpen(f) == false)
+    checkOpen(f);
+    strArr(f);
+}
+
+bool buffer::checkOpen(FILE *file)
+{
+    bool flag = true;
+    if(!file)
     {
-        exit(1);
+        cout << "Can not open file \n";
+        return flag;
     }
 
-    strLength(f);
+    else
+    {
+        return flag;
+    }
 }
-void buffer:: strLength(FILE * file)
-{
-    stepSize = 100;
-    int arrlen = stepSize;  //array length = stepSize; which equals 100; 
 
-    char buf[1000];     //creates a buffer array with size of 1000 char
-    arrayLength = 0;      //creates a counter
+void buffer:: strArr(FILE * file)
+{ 
+    char buf[1000];     ///creates a buffer array with size of 1000 char
+    int counter = 0;
 
-    //while loop that reads every line of the file
+    ///while loop that reads every line of the file
     while (fgets(buf, 1000, file))
     {
-        //checks if array is full
-        if (arrayLength == arrlen)
+        ///checks if array is full
+        if (counter == arrayLength)
         {
-            //if the array is full then array length is doubled
-            //the old array is reallocated to a new array with double the size
-            arrlen += stepSize;
-            char ** newlines = (char **) realloc(arr, 200 * sizeof(char*));
+            ///if the array is full then array length is doubled
+            ///the old array is reallocated to a new array with double the size
+            arrayLength += initSize;
+            char ** newArr = (char **) realloc(arr, arrayLength * sizeof(char*));
 
-            //if the new array did not get reallocated the program exits
-            if(!newlines)
+            ///if the new array did not get reallocated the program exits
+            if(!newArr)
             {
-                std::cout << "Can not reallocate \n";
+                cout << "Can not reallocate \n";
                 exit(1);
             }
 
-            //**Array is given the address of the new array
-            arr = newlines;
+            ///**Array is given the address of the new array
+            arr = newArr;
         }
-        //Replacing the NEW line with NULL line
-        buf[strlen(buf)] = '\0';
+        ///Replacing the NEW line with NULL line
+        buf[strlen(buf) - 1 ] = '\0';
 
-        //gets length of buffer array
+        ///gets length of buffer array
         int slen = strlen(buf);
 
-        //Allocate exact amount of space for the string + the NULL line character
-        //inside a new pointer array
-        char* str = (char *) malloc((slen + 1) * sizeof(char));
+        ///Allocate exact amount of space for the string + the NULL line character
+        ///inside a new pointer array
+        char* str = (char *) malloc(slen * sizeof(char));
             
-        //copy string from buffer array to string array
+        ///copy string from buffer array to string array
         strcpy(str, buf);
 
-        //attach string array to the array of arrays
-        arr[arrayLength] = str;
+        ///attach string array to the array of arrays
+        arr[counter] = str;
 
-        //increases the counter
-        arrayLength++;
+        ///increases the counter
+        counter++;
     }
-    //*length = arrayLength; // set the length of the array char ptr
-    //return arr;       returns the array of arrays
+}
+
+int buffer::arrLength()
+{
+    int i=0;
+    while(arr[i] != '\0')
+    {
+        i++;
+    }
+
+    cout << arrayLength << "\n";
+    cout << i << "\n";
+    arrayLength = i;
+    return arrayLength;
+}
+void buffer::print()
+{
+    for(int i = 0; i <= arrayLength; i++)
+    {
+        cout << arr[i]<< '\n';
+    }
 }

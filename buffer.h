@@ -4,18 +4,18 @@
 
 class buffer
 {
-public:
-    int stepSize;
+private:
+    const int initSize = 100;
     int arrayLength;
     char **arr;
+public:
     buffer();
-
     ~buffer();
-
-    bool checkOpen(FILE * file);
-
-    void init(char * filename);
-
-    void strLength(FILE * file);
+    
+    bool checkOpen(FILE *file);
+    void init(char *filename);
+    void strArr(FILE *file);
+    int arrLength();
+    void print();
 };
-#endif
+#endif //BUFFER_H

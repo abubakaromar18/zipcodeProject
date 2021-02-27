@@ -14,11 +14,14 @@ using namespace std;
 int main()
 {
     
-    char* file = "us_postal_code.csv";
+    char* file = "us_postal_codes.csv";
 
-    buffer zipCode();
+    buffer zipCode;
 
-    zipCode().init(file);
+    zipCode.init(file);
+
+    zipCode.print();
+
 
     return 0;
 
