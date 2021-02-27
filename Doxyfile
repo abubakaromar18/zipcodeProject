@@ -1,0 +1,41 @@
+INPUT = buffer.h buffer.cpp record.h sorting.h sorting.cpp
+
+# Suggested Settings
+PROJECT_NAME = ZipCode Project - Group 3
+PROJECT_NUMBER = Version 1.0
+TAB_SIZE = 4
+JAVADOC_AUTOBRIEF = YES
+EXTRACT_ALL = YES
+BUILTIN_STL_SUPPORT = YES
+WARNINGS = YES
+GENERATE_LATEX = YES
+SORT_MEMBER_DOCS = YES
+REPEAT_BRIEF = YES
+USE_PDFLATEX = YES
+PDF_HYPERLINKS = YES
+
+# include private members
+EXTRACT_PRIVATE = YES
+
+# Source Code Import??
+EXAMPLE_PATH = array.h array.cpp
+
+# Source code settings?
+VERBATIM_HEADERS = YES
+SOURCE_BROWSER = YES
+
+# DOT stuff
+CLASS_DIAGRAMS         = YES
+HAVE_DOT               = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+UML_LOOK               = YES
+TEMPLATE_RELATIONS     = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+DOT_MULTI_TARGETS      = YES
