@@ -1,13 +1,11 @@
-#ifndef SORTING_H
+#pragma once
+
 /**
  * @file sorting.h
  * @author Duncan M.
- * @brief Contains the Sort class
+ * @brief Contains the Table and TableElement classes
 */
 
-
-
-#define SORTING_H
 #include <iostream>
 #include <string>
 #include "./record.h"
@@ -15,8 +13,9 @@
 
 
 
-///@brief A class for sorting out the north, south, east, and west most zip codes given.
-/** The Sort class will take in the ZipCode's via the push method. It will assign the ZipCode to the appropriate cardinal direction(s) but will reject the ZipCode if the State IDs don't match. 
+/** @brief A class for sorting out the north, south, east, and west most zip codes given.
+ * @class TableElement
+ The TableElement class will take in ZipCodes via the push method. It will assign the ZipCode to the appropriate cardinal direction(s) but will reject the ZipCode if the State IDs don't match. 
 */
 class TableElement {
     /// @brief The state ID of which this sort belongs
@@ -31,19 +30,15 @@ class TableElement {
     ZipCode south;
 
     public:
-        /**
-         * @brief the default constructor for Sort class
-         * @param stateID the state ID that this sort should be assigned to
-        */
+        ///@brief the default constructor for Sort class
+        ///@param stateID the state ID that this sort should be assigned to
         TableElement(std::string stateID) : state(stateID) {}
 
-        /**
-         * @brief sorts the ZipCode into whatever proper values are for location.
-         * @pre none
-         * @post the given ZipCode is processed. Assigned to any relevant values in the sort buffer
-         * @param zip the ZipCode to process
-         * If the zip's state ID doesn't match the state ID for this Sort instance, the ZipCode will be rejected.
-        */
+        /// @brief sorts the ZipCode into whatever proper values are for location.
+        /// @pre none
+        /// @post the given ZipCode is processed. Assigned to any relevant values in the sort buffer
+        /// @param zip the ZipCode to process
+        /// If the zip's state ID doesn't match the state ID for this Sort instance, the ZipCode will be rejected.
         void push(ZipCode zip);
 
         /// @brief Gives the northernmost ZipCode
@@ -62,29 +57,53 @@ class TableElement {
         /// @return the north variable
         ZipCode getWest();
 
+        /// @brief gives the state id string
+        /// @return the state id
         std::string getStateID();
 
         /// @brief a placeholder function until a proper print function exists.
         void printStateInfo();
 
+        /// @brief overloads < operator to allow for std::set to sort these automatically.
+        /// @param other a reference value of the TableElement to be compared to
+        /// @return true if this state id is comes before the other's state id aphabetically.
+        /// Sorts alphabetically by state id.
         bool operator<(const TableElement &other){ return state < other.state;}
 };
 
 
 
-
+/**
+ * @brief A class for sorting the TableElements
+ * @class Table
+ * the insert function can take in an existing TableElement or just a ZipCode. The behaviour is different depending.
+*/
 class Table{
+    /// @brief The sorted list of TableElements
     std::set<TableElement> elements;
 
+    /// @brief Inserts an existing TableElement
+    /// @param element an initialized TableElement with data to be transferred in.
+    /// @pre element is an initialized TableElement
+    /// @post the Table includes the TableElement element
+    void insert(TableElement element);
+
 public:
-    void insert(TableElement);
-    void insert(ZipCode);
 
+    /// @brief Inserts an existing ZipCode
+    /// @param element an initialized ZipCode with data to be transferred in.
+    /// @pre zipcode is an initialized ZipCode
+    /// @post zipcode is inserted into the table into the appopriate TableElement
+    void insert(ZipCode zipcode);
 
+    /// @brief Gets the starting iterator for the TableElements set.
+    /// @pre N/A
+    /// @return the begin iterator for the TableElements set
+    std::set<TableElement>::iterator begin(){return elements.begin();}
 
-
+    /// @brief Gets the ending iterator for the TableElements set.
+    /// @pre N/A
+    /// @return the end iterator for the TableElements set
+    std::set<TableElement>::iterator end(){ return elements.end();}
 
 };
-
-
-#endif
