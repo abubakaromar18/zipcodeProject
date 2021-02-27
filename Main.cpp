@@ -13,14 +13,12 @@ using namespace std;
 
 int main()
 {
-    int length;
-    string input;
+    
+    char* file = "us_postal_code.csv";
 
-    cout << "Input the file name: ";
-    cin >> input;
-    char * file = const_cast<char*>(input.c_str());
+    buffer zipCode();
 
-    buffer zipCode(file, &length);
+    zipCode().init(file);
 
     return 0;
 

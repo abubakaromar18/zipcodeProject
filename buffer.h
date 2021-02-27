@@ -14,8 +14,8 @@ public:
 
     bool checkOpen(FILE * file);
 
-    void init(char * filename, int * length);
+    void init(char * filename);
 
-    void strLength(FILE * file, int * length);
+    void strLength(FILE * file);
 };
 #endif

@@ -32,7 +32,7 @@ bool buffer:: checkOpen(FILE * file)
         }
     return true;
 }
-void buffer::init(char * filename, int * length)
+void buffer::init(char * filename)
 
 {
     //Opens file in read only mode
@@ -43,9 +43,9 @@ void buffer::init(char * filename, int * length)
         exit(1);
     }
 
-    strLength(f, length);
+    strLength(f);
 }
-void buffer:: strLength(FILE * file, int * length)
+void buffer:: strLength(FILE * file)
 {
     stepSize = 100;
     int arrlen = stepSize;  //array length = stepSize; which equals 100; 
@@ -93,6 +93,6 @@ void buffer:: strLength(FILE * file, int * length)
         //increases the counter
         arrayLength++;
     }
-    *length = arrayLength; // set the length of the array char ptr
+    //*length = arrayLength; // set the length of the array char ptr
     //return arr;       returns the array of arrays
 }
