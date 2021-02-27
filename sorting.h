@@ -13,13 +13,17 @@
 
 
 
-/** @brief A class for sorting out the north, south, east, and west most zip codes given.
+/** @brief A class for sorting out the zip codes given.
  * @class TableElement
  The TableElement class will take in ZipCodes via the push method. It will assign the ZipCode to the appropriate cardinal direction(s) but will reject the ZipCode if the State IDs don't match. 
 */
 class TableElement {
     /// @brief The state ID of which this sort belongs
     std::string state;
+
+    /// @brief checked to see if a single ZipCode has been pushed
+    bool init = false;
+
     /// @brief The northernmost zip code
     ZipCode north;
     /// @brief The easternmost zip code
@@ -32,6 +36,8 @@ class TableElement {
     public:
         ///@brief the default constructor for Sort class
         ///@param stateID the state ID that this sort should be assigned to
+        /// @pre stateID is an initialized std::string instance
+        /// @post TableElement is initialized with provided state id
         TableElement(std::string stateID) : state(stateID) {}
 
         /// @brief sorts the ZipCode into whatever proper values are for location.
@@ -42,33 +48,41 @@ class TableElement {
         void push(ZipCode zip);
 
         /// @brief Gives the northernmost ZipCode
+        /// @pre a single ZipCode has been pushed to this TableElement
         /// @return the north variable
+        /// If no ZipCodes have been pushed yet, this will return the default ZipCode
         ZipCode getNorth();
 
         /// @brief Gives the southernmost ZipCode
+        /// @pre a single ZipCode has been pushed to this TableElement
         /// @return the north variable
+        /// If no ZipCodes have been pushed yet, this will return the default ZipCode
         ZipCode getSouth();
 
         /// @brief Gives the easternmost ZipCode
+        /// @pre a single ZipCode has been pushed to this TableElement
         /// @return the north variable
+        /// If no ZipCodes have been pushed yet, this will return the default ZipCode
         ZipCode getEast();
 
         /// @brief Gives the westernmost ZipCode
+        /// @pre a single ZipCode has been pushed to this TableElement
         /// @return the north variable
+        /// If no ZipCodes have been pushed yet, this will return the default ZipCode
         ZipCode getWest();
 
         /// @brief gives the state id string
         /// @return the state id
         std::string getStateID();
 
-        /// @brief a placeholder function until a proper print function exists.
-        void printStateInfo();
-
         /// @brief overloads < operator to allow for std::set to sort these automatically.
         /// @param other a reference value of the TableElement to be compared to
         /// @return true if this state id is comes before the other's state id aphabetically.
         /// Sorts alphabetically by state id.
-        bool operator<(const TableElement &other){ return state < other.state;}
+        bool operator<(const TableElement &other){ 
+            // From what I understand, this will sort alphabetically.
+            return state < other.state; 
+        }
 };
 
 
@@ -76,7 +90,7 @@ class TableElement {
 /**
  * @brief A class for sorting the TableElements
  * @class Table
- * the insert function can take in an existing TableElement or just a ZipCode. The behaviour is different depending.
+ * the insert function can take in an existing TableElement or just a ZipCode. The behaviour is different depending on what type is given.
 */
 class Table{
     /// @brief The sorted list of TableElements
