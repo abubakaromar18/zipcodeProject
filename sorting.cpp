@@ -1,5 +1,12 @@
 #include "sorting.h"
 
+/**
+ * @file sorting.cpp
+ * @author Duncan M.
+ * @brief Contains the definitions for the Table and TableElement classes
+*/
+
+
 void TableElement::push(ZipCode zip){
     // If the state doesn't match, don't check the zip.
     if (zip.state.compare(state) != 0) return;
