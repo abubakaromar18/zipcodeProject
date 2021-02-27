@@ -11,12 +11,14 @@
 #include <iostream>
 #include <string>
 #include "./record.h"
+#include <set>
+
 
 
 ///@brief A class for sorting out the north, south, east, and west most zip codes given.
 /** The Sort class will take in the ZipCode's via the push method. It will assign the ZipCode to the appropriate cardinal direction(s) but will reject the ZipCode if the State IDs don't match. 
 */
-class Sort {
+class TableElement {
     /// @brief The state ID of which this sort belongs
     std::string state;
     /// @brief The northernmost zip code
@@ -33,7 +35,7 @@ class Sort {
          * @brief the default constructor for Sort class
          * @param stateID the state ID that this sort should be assigned to
         */
-        Sort(std::string stateID) : state(stateID) {}
+        TableElement(std::string stateID) : state(stateID) {}
 
         /**
          * @brief sorts the ZipCode into whatever proper values are for location.
@@ -60,8 +62,29 @@ class Sort {
         /// @return the north variable
         ZipCode getWest();
 
+        std::string getStateID();
+
         /// @brief a placeholder function until a proper print function exists.
         void printStateInfo();
+
+        bool operator<(const TableElement &other){ return state < other.state;}
 };
+
+
+
+
+class Table{
+    std::set<TableElement> elements;
+
+public:
+    void insert(TableElement);
+    void insert(ZipCode);
+
+
+
+
+
+};
+
 
 #endif
