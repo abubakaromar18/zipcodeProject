@@ -70,3 +70,32 @@ void Table::insert(ZipCode a){
     te.push(a);
     insert(te);
 }
+
+
+std::string TableUtil::getNextToken(std::string &line, std::string delim){
+    int pos = line.find(delim); // find next delimiter
+    std::string token = line.substr(0, pos); // get substring between beginning and delim
+    line.erase(0, pos+delim.length()); // erase current field
+    return token; // return token.
+}
+
+std::string TableUtil::c_str_to_stl_str(const char * c_str){
+    std::string value(c_str); // simple conversion by constructor
+    return value;
+}
+
+ZipCode TableUtil::getRecordFromString(std::string line){
+    // get all 6 tokens on line
+    std::string zip = getNextToken(line, RECORD_DELIMITER);
+    std::string place = getNextToken(line, RECORD_DELIMITER);
+    std::string state = getNextToken(line, RECORD_DELIMITER);
+    std::string county = getNextToken(line, RECORD_DELIMITER);
+    std::string lat = getNextToken(line, RECORD_DELIMITER);
+    std::string lon = getNextToken(line, RECORD_DELIMITER);
+    // convert numbers value strings to appropriate types
+    int i_zip = std::stoi(zip);
+    float f_lat = std::stof(lat);
+    float f_lon = std::stof(lon);
+    // return the struct with values inserted
+    return ZipCode(i_zip, place, state, county, f_lat, f_lon);
+}
