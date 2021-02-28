@@ -11,6 +11,9 @@
 #include "./record.h"
 #include <set>
 
+#ifndef RECORD_DELIMITER
+#define RECORD_DELIMITER ","
+#endif
 
 
 /** @brief A class for sorting out the zip codes given.
@@ -121,3 +124,13 @@ public:
     std::set<TableElement>::iterator end(){ return elements.end();}
 
 };
+
+class TableUtil {
+        static std::string getNextToken(std::string &line, std::string delim); 
+
+    public:
+        static std::string c_str_to_stl_str(const char *);
+        static ZipCode getRecordFromString(std::string);
+
+
+}
