@@ -7,20 +7,26 @@
 #include "buffer.h"
 #include <iostream>
 #include <fstream>
+#include <string>
 
 
 using namespace std;
 
 int main()
 {
-    
-    char* file = "us_postal_codes.csv";
+    string line;
 
-    buffer zipCode;
+    char* inputFile = "us_postal_codes.csv";
 
-    zipCode.init(file);
+    buffer file1;
 
-    zipCode.print();
+    file1.init(inputFile);
+
+    line = file1.getInfo(10);
+
+    cout << "This is the string stored in line: \n" << line << "\n";
+
+    //file1.print();
 
 
     return 0;

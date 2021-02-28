@@ -115,3 +115,17 @@ void buffer::print()
         cout << arr[i]<< '\n';
     }
 }
+string buffer::getInfo(int index)
+{
+    string line = convertToString(arr[index]);
+
+    return line;
+    
+}
+
+string buffer::convertToString(char *a)
+{
+    string s = a;
+
+    return s;
+}
