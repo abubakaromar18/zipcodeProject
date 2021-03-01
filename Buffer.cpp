@@ -1,3 +1,4 @@
+///@file
 #include "buffer.h"
 #include <stdio.h>
 #include <iostream>
@@ -7,12 +8,26 @@
 
 using namespace std;
 
+//-----------------------------------------------------------------------------------------------
+/// @brief Default Constructor
+/// @pre Preconditions: None
+/// @post Postconditions: arrayLength is assigned value of initSize,
+//                        which equals 100.
+//                        A block of 100 char * are allocated.
+
 buffer::buffer()
 {
     arrayLength = initSize; ///array length = initSize; which equals 100; 
     ///Allocate space for 100 char *
     arr = (char**) malloc(initSize * sizeof(char*));
 }
+
+//-----------------------------------------------------------------------------------------------
+/// @brief Destructor
+/// @pre Preconditions: arr is an array that has been allocated
+///                      100 char *.
+/// @post Postconditions: arr is deleted and i't memory deallocated.
+
 buffer::~buffer()
 {
     ///Deletes every element inside the array
@@ -24,6 +39,13 @@ buffer::~buffer()
         delete [] arr;
 }
 
+//-----------------------------------------------------------------------------------------------
+// init
+/// @brief opens a file 
+/// @param A char * which points to the name of a file
+/// @pre preconditions: char * contains a pointer to a file name.
+/// @post postconditions: a file with that name is opened in read only mode.
+
 void buffer::init(char * filename)
 {
     ///Opens file in read only mode
@@ -32,6 +54,14 @@ void buffer::init(char * filename)
     checkOpen(f);
     strArr(f);
 }
+
+//-----------------------------------------------------------------------------------------------
+// checkOpen
+/// @brief checks if file is open
+/// @param A read only file stream called file
+/// @pre Preconditions: None
+/// @post Postconditions: A bool called flag is returned indicating
+//                 if the file did not open.
 
 bool buffer::checkOpen(FILE *file)
 {
@@ -47,6 +77,14 @@ bool buffer::checkOpen(FILE *file)
         return flag;
     }
 }
+
+//-----------------------------------------------------------------------------------------------
+// strArr
+/// @brief reads the file and inputs the contents of the file into the array.
+/// @param A file stream called file
+/// @pre Preconditions: file contains the read stream of the open file.
+/// @post Postconditions: An array is created containing the contents of
+//                 the file.
 
 void buffer:: strArr(FILE * file)
 { 
@@ -95,6 +133,12 @@ void buffer:: strArr(FILE * file)
     }
 }
 
+//-----------------------------------------------------------------------------------------------
+// arrLength
+/// @brief Finds the length of the array
+/// @pre Preconditions: None
+/// @post Postconditions: arrayLength is returned with the length of the array.
+
 int buffer::arrLength()
 {
     int i=0;
@@ -108,6 +152,13 @@ int buffer::arrLength()
     arrayLength = i;
     return arrayLength;
 }
+
+//-----------------------------------------------------------------------------------------------
+// print
+/// @brief Prints out the contents of the array.
+/// @pre Preconditions: None
+/// @post Postconditions: The contents of arr are printed one to each line.
+
 void buffer::print()
 {
     for(int i = 0; i <= arrayLength; i++)
@@ -115,6 +166,14 @@ void buffer::print()
         cout << arr[i]<< '\n';
     }
 }
+
+//-----------------------------------------------------------------------------------------------
+// getInfo
+/// @brief retrieves info from array and store it in a string.
+/// @param an int called index
+/// @pre Preconditions: index contains an int
+/// @post Postconditions: line contains a string converted from arr
+
 string buffer::getInfo(int index)
 {
     string line = convertToString(arr[index]);
@@ -122,6 +181,13 @@ string buffer::getInfo(int index)
     return line;
     
 }
+
+//-----------------------------------------------------------------------------------------------
+// convertToString
+/// @brief convert the char to a string.
+/// @param 
+/// @pre Preconditions: None
+/// @post Postconditions: a string s is returned.
 
 string buffer::convertToString(char *a)
 {
