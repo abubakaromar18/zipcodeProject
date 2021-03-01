@@ -48,6 +48,11 @@ std::string TableElement::getStateID(){
     return state;
 }
 
+void TableElement::printInfo(){
+    std::cout << "* " << state << " | " << north.zipcode << "   " << south.zipcode << "   " << east.zipcode << "   " << west.zipcode << std::endl;
+}
+
+
 void Table::insert(TableElement a){
     /*
         Because this is a set and TableElement overrides the < op, 

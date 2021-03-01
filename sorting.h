@@ -86,6 +86,8 @@ class TableElement {
             // From what I understand, this will sort alphabetically.
             return state < other.state; 
         }
+        /// @brief Prints out the pertinent info for the Table Element as desired in the specification.
+        void printInfo();
 };
 
 
@@ -133,4 +135,4 @@ class TableUtil {
         static ZipCode getRecordFromString(std::string);
 
 
-}
+};
