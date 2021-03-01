@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <string>
-#include "./record.h"
+#include "record.h"
 #include <set>
 
 #ifndef RECORD_DELIMITER
@@ -82,7 +82,7 @@ class TableElement {
         /// @param other a reference value of the TableElement to be compared to
         /// @return true if this state id is comes before the other's state id aphabetically.
         /// Sorts alphabetically by state id.
-        bool operator<(const TableElement &other){ 
+        bool operator<(const TableElement &other) const { 
             // From what I understand, this will sort alphabetically.
             return state < other.state; 
         }

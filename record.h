@@ -14,7 +14,7 @@
 struct ZipCode {
     
     /// @brief default constructor for an uninitialized ZipCode
-    ZipCode();
+    ZipCode(){}
 
     /// @brief constructor for ZipCode that initializes all values
     /// @pre all parameters are initialized and have proper values stored
